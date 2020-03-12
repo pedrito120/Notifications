@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <form #f="ngForm" class="mt-5">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Notification Header</label>
+          <input type="text" class="form-control" name="header" [(ngModel)]="data.header" #header="ngModel" required>
+          <div *ngIf="header.invalid && (header.dirty || header.touched)">
+            <div *ngIf="header.hasError('required')" class="alert alert-danger">
+              HEADER IS REQUIRED
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Contents</label>
+          <input class="form-control" type="text" name="contents" [(ngModel)]="data.contents"
+            #contents="ngModel" required>
+          <div *ngIf="contents.invalid && (contents.dirty || contents.touched)">
+            <div *ngIf="contents.hasError('required')" class="alert alert-danger">
+              CONTENTS IS REQUIRED
+            </div>
+          </div>
+        </div>
+        <div class="form-check" *ngFor="let checkbox of checkBoxes; index as i">
+          <input class="form-check-input" id="{{checkbox}}" value="{{checkbox}}"
+           type="checkbox"  name="{{checkbox}}" [(ngModel)]="data[checkbox]"
+          #{{checkbox}}="ngModel">
+          <label class="form-check-label" for="{{checkbox}}">
+           {{checkbox}}
+          </label>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid" (click)="onSubmit(data)">Submit</button>
+      </form>
+    </div>
+    <div class="col-lg-2"></div>
+  </div>
+</div>
